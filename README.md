@@ -54,20 +54,31 @@ This will deploy `asset` files inside the public folder with the name `lrs-nelc-
 ## Step 6: Configure Basic Settings
 To start using this package, follow these steps to configure the basic settings and connect with NELC XAPI:
 
-Open the `lrs-nelc-xapi.php` file inside the `config` folder. Adjust the basic settings according to your requirements. Make sure to set up any necessary `enpoint`, `authentication (key, secret)` details, and other configuration options.
+
+Add your `LRS_ENDPOINT` and `LRS_USERNAME` and `LRS_PASSWORD` to projects `.env` file
+```bash
+# .env file content
+LRS_ENDPOINT=provided_lrs_endpoint
+LRS_USERNAME=your_lrs_username
+LRS_PASSWORD=your_lrs_password
+```
+
+If needed you can open the `lrs-nelc-xapi.php` file inside the `config` folder. Adjust the basic settings according to your requirements. Make sure to set up any `authentication (key, secret)` details through `.env` file to avoid these sensitive being commited to git repo and being exposed.
 
 ```php
 // config/lrs-nelc-xapi.php
 return [
-    'endpoint'      => 'https://lrs.nelc.gov.sa/staging-lrs/xapi/statements', // Replace with endpoint.
+    'endpoint'      => env('LRS_ENDPOINT'),
     'middleware'      => ['web'], // Middleware to display the demo page, ['web', 'auth', ...]
-    'key'    => 'userName',
-    'secret'    => 'pasword',
+    'key'    => env('LRS_USERNAME'),
+    'secret'    => env('LRS_PASSWORD'),
     'platform_in_arabic'    => '', // Platform name in Arabic
     'platform_in_english'    => '', // Platform name in English
     'base_route'    => 'nelcxapi/test', // Demo Page Link
 ];
 ```
+
+
 Now, you can go to the demo page and start testing statement submissions using the following link:
 `https://your-site.com/nelcxapi/test` or through the `route('lrs-nelc-xapi.base_route')`.
 
@@ -138,7 +149,7 @@ $response = $xapi->Watched(
     'New Course description', // Course description
     'MR Hassan', // instructor Name
     'mrhassan@mail.com',  // instructor Email
-    
+
 );
 
 // dd( $response['status'] ); return 200
@@ -165,7 +176,7 @@ $response = $xapi->CompletedLesson(
     'New Course', // Course Title
     'New Course description', // Course description
     'MR Hassan', // instructor Name
-    'mrhassan@mail.com',  // instructor Email                
+    'mrhassan@mail.com',  // instructor Email
 );
 
 // dd( $response['status'] ); return 200
