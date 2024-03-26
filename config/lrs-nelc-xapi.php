@@ -1,6 +1,6 @@
 <?php
 return [
-    'endpoint'      => env('LRS_ENDPOINT', 'https://lrs.nelc.gov.sa/staging-lrs/xapi/statements'),
+    'endpoint'      => env('LRS_ENDPOINT'),
     'middleware'      => ['web'],
     'key'    => env('LRS_USERNAME'),
     'secret'    => env('LRS_PASSWORD'),

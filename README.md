@@ -58,7 +58,7 @@ To start using this package, follow these steps to configure the basic settings 
 Add your `LRS_ENDPOINT` and `LRS_USERNAME` and `LRS_PASSWORD` to projects `.env` file
 ```bash
 # .env file content
-LRS_ENDPOINT=your_endpoint # Default is: https://lrs.nelc.gov.sa/staging-lrs/xapi/statements
+LRS_ENDPOINT=provided_lrs_endpoint
 LRS_USERNAME=your_lrs_username
 LRS_PASSWORD=your_lrs_password
 ```
@@ -68,7 +68,7 @@ If needed you can open the `lrs-nelc-xapi.php` file inside the `config` folder. 
 ```php
 // config/lrs-nelc-xapi.php
 return [
-    'endpoint'      => env('LRS_ENDPOINT', 'https://lrs.nelc.gov.sa/staging-lrs/xapi/statements'),
+    'endpoint'      => env('LRS_ENDPOINT'),
     'middleware'      => ['web'], // Middleware to display the demo page, ['web', 'auth', ...]
     'key'    => env('LRS_USERNAME'),
     'secret'    => env('LRS_PASSWORD'),
