@@ -39,7 +39,7 @@ class Watched
                         'objectType' => 'Agent',
                     ),
             'verb' => array(
-                        'id' => 'http://activitystrea.ms/watch',
+                        'id' => 'https://w3id.org/xapi/acrossx/verbs/watched',
                         'display' => array("en-US" => "watched") 
                     ),
             'object' => array(
@@ -47,7 +47,7 @@ class Watched
                             'definition' => array(
                                 'name' => array(strval($this->lang) => strval($lessonTitle)),
                                 'description' => array(strval($this->lang) => strval($lessonDesc)),
-                                'type' => 'http://adlnet.gov/expapi/activities/lesson'
+                                'type' => 'https://w3id.org/xapi/video/activity-type/video'
                             ),
                             'objectType' => 'Activity',
                         ),
