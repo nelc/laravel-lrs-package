@@ -24,7 +24,7 @@ class Registered
         $this->lang = App::getLocale() === 'ar' ? 'ar-SA' : 'en-US';
     }
 
-    public function Send($actor, $actorEmail, $actorName, $actorMobile, $actorBirth, $actorNationality, $courseId, $courseTitle, $courseDesc, $instructor, $instructorEmail, $duration)
+    public function Send($actor, $actorEmail, $actorName, $actorMobile, $actorBirth, $actorNationality, $courseId, $courseTitle, $courseDesc, $instructor, $instructorEmail, $duration, $lms_url, $program_url)
     {
         $this->init();
         $data = array(
@@ -55,6 +55,8 @@ class Registered
                 'language' => strval($this->lang),
                 "extensions" => array(
                     "https://nelc.gov.sa/extensions/duration" => strval($duration),
+                    "https://nelc.gov.sa/extensions/lms_url" => strval($lms_url),
+                    "https://nelc.gov.sa/extensions/program_url" => strval($program_url),
                     "https://nelc.gov.sa/extensions/learner_mobile_no" => strval($actorMobile),
                     "https://nelc.gov.sa/extensions/learner_full_name" => strval($actorName),
                     "https://nelc.gov.sa/extensions/learner_nationality" => strval($actorNationality),
