@@ -22,15 +22,21 @@ class XapiIntegration
     protected $url;
     protected $key;
     protected $secret;
+    protected $timeout;
+    protected $verifySsl;
 
     public function __construct()
     {
         $this->url = config('lrs-nelc-xapi.endpoint');
         $this->key = config('lrs-nelc-xapi.key');
         $this->secret = config('lrs-nelc-xapi.secret');
+        $this->timeout = config('lrs-nelc-xapi.timeout', 15);
+        $this->verifySsl = config('lrs-nelc-xapi.verify_ssl', true);
 
         $this->client =  new Client([
             'auth' => [$this->key, $this->secret],
+            'timeout' => $this->timeout,
+            'verify' => $this->verifySsl,
         ]);
 
         $this->headers = [
@@ -123,6 +129,14 @@ class XapiIntegration
     public function sendXAPIRequest($data = [])
     {
 
+        if (empty($this->url)) {
+            return [
+                'status' => 0,
+                'message' => 'Missing LRS endpoint',
+                'body' => null,
+            ];
+        }
+
         $options = [
             'json' => $data,
             'headers' => $this->headers,
@@ -140,12 +154,17 @@ class XapiIntegration
             $response = $e->getResponse();
 
             return [
-                'status' => $response->getStatusCode(),
-                'message' => $response->getReasonPhrase(),
-                'body' => $response->getBody()->getContents(),
+                'status' => $response?->getStatusCode() ?? 0,
+                'message' => $response?->getReasonPhrase() ?? $e->getMessage(),
+                'body' => $response?->getBody()?->getContents(),
             ];
         }
 
+    }
+
+    public function statement(array $data = [])
+    {
+        return $this->sendXAPIRequest($data);
     }
 
 }

@@ -17,10 +17,10 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3 || ^8.4",
+        "php": "^8.3 || ^8.4",
         "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
         "guzzlehttp/guzzle": "^7.2",
-        "jenssegers/agent": "^2.6"
+        "cuteminded/agent": "^3.0"
     },
     "require-dev": {
         

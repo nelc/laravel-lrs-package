@@ -3,7 +3,7 @@
 namespace Nelc\LaravelNelcXapiIntegration\Interactions;
 
 use Illuminate\Support\Facades\App;
-use Jenssegers\Agent\Agent;
+use cuteminded\Agent\Agent;
 
 class Completed
 {
@@ -18,8 +18,8 @@ class Completed
 
     public function __construct()
     {
-        $this->platform_in_arabic = config('platform_in_arabic');
-        $this->platform_in_english = config('platform_in_english');
+         $this->platform_in_arabic = config('lrs-nelc-xapi.platform_in_arabic');
+        $this->platform_in_english = config('lrs-nelc-xapi.platform_in_english');
         $this->platform = App::getLocale() === 'ar' ? $this->platform_in_arabic : $this->platform_in_english;
         $this->lang = App::getLocale() === 'ar' ? 'ar-SA' : 'en-US';
 

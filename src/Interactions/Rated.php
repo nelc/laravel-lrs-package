@@ -3,6 +3,7 @@
 namespace Nelc\LaravelNelcXapiIntegration\Interactions;
 
 use Illuminate\Support\Facades\App;
+use cuteminded\Agent\Agent;
 
 class Rated
 {
@@ -11,11 +12,19 @@ class Rated
     protected $platform_in_english;
     protected $platform;
     protected $lang;
+    protected $browserName;
+    protected $browserVersion;
+    protected $browserCode;
 
     public function __construct()
     {
-        $this->platform_in_arabic = config('platform_in_arabic');
-        $this->platform_in_english = config('platform_in_english');
+       $this->platform_in_arabic = config('lrs-nelc-xapi.platform_in_arabic');
+        $this->platform_in_english = config('lrs-nelc-xapi.platform_in_english');
+        $this->lang = App::getLocale() === 'ar' ? 'ar-SA' : 'en-US';
+        $agent = new Agent();
+        $this->browserName = $agent->browser();
+        $this->browserVersion = $agent->version($this->browserName);
+        $this->browserCode = $agent->platform();
         $this->platform = App::getLocale() === 'ar' ? $this->platform_in_arabic : $this->platform_in_english;
         $this->lang = App::getLocale() === 'ar' ? 'ar-SA' : 'en-US';
     }
