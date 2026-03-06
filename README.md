@@ -20,30 +20,14 @@ You can install this library using Composer. Run the following command:
 composer require nelc/laravel-nelc-xapi-integration
 ```
 
-## Step 3: Register the ServiceProvider
-
-Register the `NelcXapiServiceProvider` in your Laravel project. Open the `config/app.php` file and add the following line to the `providers` array:
-
-```php
-// config/app.php
-
-'providers' => ServiceProvider::defaultProviders()->merge([
-    /*
-        * Package Service Providers...
-    */
-    // Other providers...
-    Nelc\LaravelNelcXapiIntegration\NelcXapiServiceProvider::class,
-])->toArray(),
-```
-
-## Step 4: Dump Autoload Files
-After registering the ServiceProvider, run the following command to re-generate Composer's autoloader files:
+## Step 3: Dump Autoload Files
+After installation, run the following command to re-generate Composer's autoloader files:
 
 ```bash
 composer dump-autoload
 ```
 
-## Step 5: Publish Configuration Files
+## Step 4: Publish Configuration Files
 To publish the configuration files provided by this package, run the following Artisan command:
 
 ```bash
@@ -51,7 +35,7 @@ php artisan vendor:publish --provider="Nelc\LaravelNelcXapiIntegration\NelcXapiS
 ```
 This will deploy `asset` files inside the public folder with the name `lrs-nelc-xapi` and the file `lrs-nelc-xapi.php` inside the `config` folder.
 
-## Step 6: Configure Basic Settings
+## Step 5: Configure Basic Settings
 To start using this package, follow these steps to configure the basic settings and connect with NELC XAPI:
 
 
