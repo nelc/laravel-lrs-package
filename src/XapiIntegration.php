@@ -4,6 +4,7 @@ namespace Nelc\LaravelNelcXapiIntegration;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Log;
 use Nelc\LaravelNelcXapiIntegration\Interactions\Attempted;
 use Nelc\LaravelNelcXapiIntegration\Interactions\Completed;
 use Nelc\LaravelNelcXapiIntegration\Interactions\CompletedCourse;
@@ -41,7 +42,7 @@ class XapiIntegration
 
         $this->headers = [
             'Content-Type'  => 'application/json',
-            'Access-Control-Allow-Origin'   => '*',
+            'X-Experience-API-Version' => '1.0.3',
         ];
 
     }
@@ -142,16 +143,41 @@ class XapiIntegration
             'headers' => $this->headers,
         ];
 
+        Log::channel('nelc')->debug('[NELC Package] Sending xAPI request', [
+            'url' => $this->url,
+            'headers' => $this->headers,
+            'has_auth' => filled($this->key) && filled($this->secret),
+            'timeout' => $this->timeout,
+            'verify_ssl' => $this->verifySsl,
+            'payload_size' => strlen(json_encode($data) ?: ''),
+        ]);
+
         try {
             $response = $this->client->post($this->url, $options);
+
+            $body = $response->getBody()->getContents();
+
+            Log::channel('nelc')->debug('[NELC Package] Response OK', [
+                'status' => $response->getStatusCode(),
+                'reason' => $response->getReasonPhrase(),
+                'body' => $body,
+                'headers' => $response->getHeaders(),
+            ]);
 
             return [
                 'status' => $response->getStatusCode(),
                 'message' => $response->getReasonPhrase(),
-                'body' => $response->getBody()->getContents(),
+                'body' => $body,
             ];
         } catch (RequestException $e) {
             $response = $e->getResponse();
+
+            Log::channel('nelc')->error('[NELC Package] Request failed', [
+                'status' => $response?->getStatusCode() ?? 0,
+                'reason' => $response?->getReasonPhrase() ?? $e->getMessage(),
+                'body' => $response?->getBody()?->getContents(),
+                'exception' => $e->getMessage(),
+            ]);
 
             return [
                 'status' => $response?->getStatusCode() ?? 0,
