@@ -169,6 +169,7 @@ class LrsNelcXapiController extends Controller
                     '123456789', // Student National ID
                     'betalamoud@gmail.com', // Student Email
                     'path/to/cert',
+                    'path/to/cert2',
                     'cert name',
                     '123',
                     'New Course',

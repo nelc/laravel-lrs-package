@@ -112,10 +112,10 @@ class XapiIntegration
         return $this->sendXAPIRequest($data);
     }
 
-    public function Earned($actor, $actorEmail, $certUrl, $certName, $courseId, $courseTitle, $courseDesc)
+    public function Earned($actor, $actorEmail, $certUrl, $certUrl2, $certName, $courseId, $courseTitle, $courseDesc)
     {
         $instance = new Earned();
-        $data = $instance->Send($actor, $actorEmail, $certUrl, $certName, $courseId, $courseTitle, $courseDesc);
+        $data = $instance->Send($actor, $actorEmail, $certUrl, $certUrl2, $certName, $courseId, $courseTitle, $courseDesc);
 
         return $this->sendXAPIRequest($data);
     }

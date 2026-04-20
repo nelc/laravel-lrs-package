@@ -24,55 +24,57 @@ class Earned
         $this->lang = App::getLocale() === 'ar' ? 'ar-SA' : 'en-US';
     }
 
-    public function Send( $actor, $actorEmail, $certUrl, $certName, $courseId, $courseTitle, $courseDesc ){
+    public function Send($actor, $actorEmail, $certUrl, $certUrl2, $certName, $courseId, $courseTitle, $courseDesc)
+    {
         $this->init();
         $data = array(
             'actor' => array(
                 'name' => strval($actor),
-                'mbox'  => 'mailto:'.strval($actorEmail),
-                        'objectType' => 'Agent',
-                    ),
+                'mbox' => 'mailto:' . strval($actorEmail),
+                'objectType' => 'Agent',
+            ),
             'verb' => array(
-                        'id' => 'http://id.tincanapi.com/verb/earned',
-                        'display' => array("en-US" => "earned") 
-                    ),
+                'id' => 'http://id.tincanapi.com/verb/earned',
+                'display' => array("en-US" => "earned")
+            ),
             'object' => array(
-                            'id'=> strval($certUrl),
-                            'definition' => array(
-                                'name' => array("en-US"=> strval($certName)),
-                                'type' => 'https://www.opigno.org/en/tincan_registry/activity_type/certificate'
-                            ),
-                            'objectType' => 'Activity',
-                        ),
+                'id' => strval($certUrl2),
+                'definition' => array(
+                    'name' => array("en-US" => strval($certName)),
+                    'type' => 'https://www.opigno.org/en/tincan_registry/activity_type/certificate'
+                ),
+                'objectType' => 'Activity',
+            ),
             'context' => array(
-                            'extensions' => array (
-                                "http://id.tincanapi.com/extension/jws-certificate-location" => strval($certUrl),
-                                "https://nelc.gov.sa/extensions/platform" => array(
-                                    "name" => array(
-                                        "ar-SA" => strval($this->platform_in_arabic),
-                                        "en-US" => strval($this->platform_in_english)
-                                    )
-                                )
+                'extensions' => array(
+                    "http://id.tincanapi.com/extension/jws-certificate-location" => strval($certUrl),
+                    "https://nelc.gov.sa/extensions/platform" => array(
+                        "name" => array(
+                            "ar-SA" => strval($this->platform_in_arabic),
+                            "en-US" => strval($this->platform_in_english)
+                        )
+                    )
+                ),
+                'platform' => strval($this->platform),
+                'language' => strval($this->lang),
+                'contextActivities' => array(
+                    'parent' => array(
+                        array(
+                            'id' => strval($courseId),
+                            'definition' => array(
+                                'name' => array("en-US" => strval($courseTitle)),
+                                'description' => array("en-US" => strval($courseDesc)),
+                                'type' => 'https://w3id.org/xapi/cmi5/activitytype/course'
                             ),
-                            'platform' => strval($this->platform),
-                            'language' => strval($this->lang),
-                            'contextActivities' => array(
-                                'parent' => array(
-                                    array (
-                                        'id' => strval($courseId),
-                                        'definition' => array(  
-                                            'name' => array("en-US" => strval($courseTitle)),
-                                            'description' => array( "en-US" => strval($courseDesc) ),                                            'type' => 'https://w3id.org/xapi/cmi5/activitytype/course'
-                                        ),
-                                        'objectType' => "Activity"
-                                    )
-                                )
-                            )
-                        ),
-            'timestamp' => date('Y-m-d\TH:i:s'.substr((string)microtime(), 1, 4).'\Z')
+                            'objectType' => "Activity"
+                        )
+                    )
+                )
+            ),
+            'timestamp' => date('Y-m-d\TH:i:s' . substr((string) microtime(), 1, 4) . '\Z')
         );
 
         return $data;
     }
-    
+
 }
