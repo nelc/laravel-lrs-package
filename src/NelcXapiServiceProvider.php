@@ -1,6 +1,6 @@
 <?php
 
-namespace Nelc\LaravelNelcXapiIntegration;
+namespace Bzzix\LaravelLrsPackage;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;

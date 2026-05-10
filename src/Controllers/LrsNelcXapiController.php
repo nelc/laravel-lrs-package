@@ -1,11 +1,11 @@
 <?php
 
-namespace Nelc\LaravelNelcXapiIntegration\Controllers;
+namespace Bzzix\LaravelLrsPackage\Controllers;
 
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Nelc\LaravelNelcXapiIntegration\XapiIntegration;
+use Bzzix\LaravelLrsPackage\XapiIntegration;
 
 class LrsNelcXapiController extends Controller
 {

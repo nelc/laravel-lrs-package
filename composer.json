@@ -1,18 +1,19 @@
 {
-    "name": "nelc/laravel-nelc-xapi-integration",
-    "description": "xAPI Integration with NELC (National Center for e-Learning)",
+    "name": "bzzix/laravel-lrs-package",
+    "description": "xAPI Integration with NELC (National Center for e-Learning) - Laravel Package",
     "keywords": [
         "NELC xAPI Integration",
         "xAPI",
-        "NELC Saudi"
+        "NELC Saudi",
+        "LRS Laravel"
     ],
-    "homepage": "https://github.com/nelc/laravel-nelc-xapi-integration",
-    "type": "project",
+    "homepage": "https://github.com/bzzix/laravel-lrs-package",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mahmoud Hassan",
-            "email": "betalamoud@gmail.com",
+            "name": "Bzzix Team",
+            "email": "info@bzzix.com",
             "role": "Developer"
         }
     ],
@@ -26,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nelc\\LaravelNelcXapiIntegration\\": "src/"
+            "Bzzix\\LaravelLrsPackage\\": "src/"
         }
     },
     "scripts": {

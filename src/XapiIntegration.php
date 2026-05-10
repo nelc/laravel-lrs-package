@@ -1,19 +1,19 @@
 <?php
 
-namespace Nelc\LaravelNelcXapiIntegration;
+namespace Bzzix\LaravelLrsPackage;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Attempted;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Completed;
-use Nelc\LaravelNelcXapiIntegration\Interactions\CompletedCourse;
-use Nelc\LaravelNelcXapiIntegration\Interactions\CompletedUnit;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Earned;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Initialized;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Progressed;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Rated;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Registered;
-use Nelc\LaravelNelcXapiIntegration\Interactions\Watched;
+use Bzzix\LaravelLrsPackage\Interactions\Attempted;
+use Bzzix\LaravelLrsPackage\Interactions\Completed;
+use Bzzix\LaravelLrsPackage\Interactions\CompletedCourse;
+use Bzzix\LaravelLrsPackage\Interactions\CompletedUnit;
+use Bzzix\LaravelLrsPackage\Interactions\Earned;
+use Bzzix\LaravelLrsPackage\Interactions\Initialized;
+use Bzzix\LaravelLrsPackage\Interactions\Progressed;
+use Bzzix\LaravelLrsPackage\Interactions\Rated;
+use Bzzix\LaravelLrsPackage\Interactions\Registered;
+use Bzzix\LaravelLrsPackage\Interactions\Watched;
 
 class XapiIntegration
 {

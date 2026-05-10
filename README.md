@@ -17,8 +17,8 @@ Laravel package for integrating with the Saudi National Center for e-Learning (N
 
 ### Installation
 
-1. **Install Package:** `composer require nelc/laravel-nelc-xapi-integration`
-2. **Publish Config:** `php artisan vendor:publish --provider="Nelc\LaravelNelcXapiIntegration\NelcXapiServiceProvider"`
+1. **Install Package:** `composer require bzzix/laravel-lrs-package`
+2. **Publish Config:** `php artisan vendor:publish --provider="Bzzix\LaravelLrsPackage\NelcXapiServiceProvider"`
 3. **Environment (.env):**
 ```env
 LRS_ENDPOINT=https://your-lrs-endpoint.com/xapi/statements
@@ -113,8 +113,8 @@ The library supports: `Registered`, `Initialized`, `Watched`, `CompletedLesson`,
 
 ### الإعداد الأساسي
 
-1. **التثبيت:** `composer require nelc/laravel-nelc-xapi-integration`
-2. **النشر:** `php artisan vendor:publish --provider="Nelc\LaravelNelcXapiIntegration\NelcXapiServiceProvider"`
+1. **التثبيت:** `composer require bzzix/laravel-lrs-package`
+2. **النشر:** `php artisan vendor:publish --provider="Bzzix\LaravelLrsPackage\NelcXapiServiceProvider"`
 3. **البيئة (.env):**
 ```env
 LRS_ENDPOINT=https://your-lrs-endpoint.com/xapi/statements
