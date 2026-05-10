@@ -22,13 +22,12 @@ class NelcXapiServiceProvider extends ServiceProvider
         // Load configuration files
 
         $this->publishes([
-            self::CONFIG_PATH => config_path()
-        ], 'config');
+            self::CONFIG_PATH . '/lrs-nelc-xapi.php' => config_path('lrs-nelc-xapi.php'),
+        ], 'lrs-nelc-xapi-config');
 
-        // Load assets files
         $this->publishes([
-            self::ASSET_PATH => public_path('lrs-nelc-xapi')
-        ], 'assets');
+            self::ASSET_PATH => public_path('lrs-nelc-xapi'),
+        ], 'lrs-nelc-xapi-assets');
 
         // Load route files
         $this->loadRoutesFrom(self::ROUTE_PATH . '/web.php');
