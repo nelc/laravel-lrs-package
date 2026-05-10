@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'namespace'  => '\Nelc\LaravelNelcXapiIntegration\Controllers',
+    'namespace'  => '\Bzzix\LaravelLrsPackage\Controllers',
     'middleware' => config('lrs-nelc-xapi.middleware')
 ], function () {
     Route::get(config('lrs-nelc-xapi.base_route'), 'LrsNelcXapiController@getIndex')
