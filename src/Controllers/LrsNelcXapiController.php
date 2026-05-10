@@ -3,184 +3,131 @@
 namespace Bzzix\LaravelLrsPackage\Controllers;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Bzzix\LaravelLrsPackage\XapiIntegration;
 
 class LrsNelcXapiController extends Controller
 {
-
-    public function __construct()
-    {
-    }
-
     public function getIndex(Request $request)
     {
-
         return view('lrs-nelc-xapi::index');
     }
 
     public function postIndex(Request $request)
     {
-
         $request->validate([
             'xapi_statement' => ['required', 'string', 'in:registered,initialized,watched,completed_lesson,completed_unit,progressed,attempted,completed_course,earned,rated']
         ]);
 
         $xapi = new XapiIntegration();
+        $statement = $request->xapi_statement;
 
-        switch ( $request->xapi_statement )
-        {
+        // Common dummy data for testing
+        $commonData = [
+            'name' => '1234567890', // National ID
+            'email' => 'student@example.com',
+            'courseId' => 'http://example.com/course/123',
+            'courseName' => 'Advanced Laravel Development',
+            'courseDesc' => 'Mastering Laravel and xAPI Integration',
+            'instructor' => 'Bzzix Expert',
+            'inst_email' => 'expert@bzzix.com',
+        ];
+
+        switch ($statement) {
             case "registered":
-                $response = $xapi->Registered(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123', // Course Id OR url Or slug
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'duration' => 'PT10H',
+                    'learnerFullName' => 'Ahmed Mohamed Ali',
+                    'learnerMobileNo' => '+966500000000',
+                    'learnerNationality' => 'Saudi',
+                    'dateOfBirth' => '1995-05-15',
+                ]);
+                $response = $xapi->Registered($data);
+                break;
+
             case "initialized":
-                $response = $xapi->Initialized(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123', // Course Id OR url Or slug
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                );
-            break;
+                $response = $xapi->Initialized($commonData);
+                break;
+
             case "watched":
-                $response = $xapi->Watched(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '/url/to/lesson',
-                    'Lesson title',
-                    'Lesson description',
-                    true, // is lesson completed
-                    'PT15M', // watching duration
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                    
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'lessonUrl' => 'http://example.com/lesson/1',
+                    'lessonName' => 'Introduction to xAPI',
+                    'lessonDesc' => 'Basic concepts of xAPI',
+                    'completion' => true,
+                    'duration' => 'PT15M',
+                ]);
+                $response = $xapi->Watched($data);
+                break;
+
             case "completed_lesson":
-                $response = $xapi->CompletedLesson(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '/url/to/lesson',
-                    'Lesson title',
-                    'Lesson description',
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email                    
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'lessonUrl' => 'http://example.com/lesson/1',
+                    'lessonName' => 'Introduction to xAPI',
+                    'lessonDesc' => 'Basic concepts of xAPI',
+                    'lessonDuration' => 'PT20M',
+                ]);
+                $response = $xapi->CompletedLesson($data);
+                break;
+
             case "completed_unit":
-                $response = $xapi->CompletedUnit(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '/url/to/unit',
-                    'Unit title',
-                    'Unit description',
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email                 
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'unitUrl' => 'http://example.com/unit/1',
+                    'unitName' => 'Module 1: Fundamentals',
+                    'unitDesc' => 'Core concepts of the system',
+                ]);
+                $response = $xapi->CompletedUnit($data);
+                break;
+
             case "progressed":
-                $response = $xapi->Progressed(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                    0.5,
-                    true                   
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'scaled' => 0.75,
+                    'completion' => false,
+                ]);
+                $response = $xapi->Progressed($data);
+                break;
+
             case "attempted":
-                $response = $xapi->Attempted(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '/path/to/quiz',
-                    'Quiz title',
-                    'Quiz description',
-                    1, // attempt Number
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                    0.5, // scaled
-                    30, // raw
-                    25, // min
-                    50, // max
-                    true,
-                    true                 
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'quizUrl' => 'http://example.com/quiz/1',
+                    'quizName' => 'Final Exam',
+                    'quizDesc' => 'Testing your knowledge',
+                    'attempNumber' => '1',
+                    'scaled' => 0.95,
+                    'raw' => 95,
+                    'min' => 0,
+                    'max' => 100,
+                    'completion' => true,
+                    'success' => true,
+                ]);
+                $response = $xapi->Attempted($data);
+                break;
+
             case "completed_course":
-                $response = $xapi->CompletedCourse(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123',
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email                 
-                );
-            break;
+                $response = $xapi->CompletedCourse($commonData);
+                break;
+
             case "earned":
-                $response = $xapi->Earned(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    'path/to/cert',
-                    'cert name',
-                    '123',
-                    'New Course',
-                    'New Course description',            
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'certUrl' => 'http://example.com/certificates/123.pdf',
+                    'certName' => 'Full Stack Developer Certificate',
+                ]);
+                $response = $xapi->Earned($data);
+                break;
+
             case "rated":
-                $response = $xapi->Rated(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123',
-                    'New Course',
-                    'New Course description',    
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                    0.8,
-                    5,
-                    'Thank you' 
-                );
-            break;
+                $data = array_merge($commonData, [
+                    'scaled' => 1.0,
+                    'raw' => 5,
+                    'comment' => 'This package is amazing! Very easy to use.',
+                ]);
+                $response = $xapi->Rated($data);
+                break;
+
             default:
-                $response = $xapi->Registered(
-                    '123456789', // Student National ID
-                    'betalamoud@gmail.com', // Student Email
-                    '123', // Course Id OR url Or slug
-                    'New Course',
-                    'New Course description',
-                    'MR Hassan', // instructor Name
-                    'mrhassan@mail.com',  // instructor Email
-                );
+                $response = $xapi->Registered($commonData);
         }
 
-        return redirect()->back()->with(['success'=> $response, 'st'=> $request->xapi_statement]);
+        return redirect()->back()->with(['success' => $response, 'st' => $statement]);
     }
-
 }
