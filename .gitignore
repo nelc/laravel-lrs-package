@@ -1,2 +1,1 @@
-# Ignore Interactions folders kept for local matching
-**/Interactions/
+# Ignore the reference Interactions folder in the root
