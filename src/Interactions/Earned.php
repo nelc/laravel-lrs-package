@@ -14,7 +14,7 @@ class Earned extends BaseInteraction
         $certName = $data['certName'];
         $courseId = $data['courseId'];
         $courseTitle = $data['courseName'];
-        $courseDesc = $data['courseDesc'];
+        $courseDesc = '';
 
         $vars = array(
             'actor' => array(

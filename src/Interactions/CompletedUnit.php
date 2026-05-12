@@ -15,7 +15,7 @@ class CompletedUnit extends BaseInteraction
         $unitDesc = $data['unitDesc'];
         $courseId = $data['courseId'];
         $courseTitle = $data['courseName'];
-        $courseDesc = $data['courseDesc'];
+        $courseDesc = '';
         $instructor = $data['instructor'];
         $instructorEmail = $data['inst_email'];
 

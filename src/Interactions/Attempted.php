@@ -16,7 +16,7 @@ class Attempted extends BaseInteraction
         $attempNumber = $data['attempNumber'];
         $courseId = $data['courseId'];
         $courseTitle = $data['courseName'];
-        $courseDesc = $data['courseDesc'];
+        $courseDesc = '';
         $instructor = $data['instructor'];
         $instructorEmail = $data['inst_email'];
         $scaled = $data['scaled'];

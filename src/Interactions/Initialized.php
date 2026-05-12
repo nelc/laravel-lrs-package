@@ -12,7 +12,7 @@ class Initialized extends BaseInteraction
         $actorEmail = $data['email'];
         $courseId = $data['courseId'];
         $courseTitle = $data['courseName'];
-        $courseDesc = $data['courseDesc'];
+        $courseDesc = '';
         $instructor = $data['instructor'];
         $instructorEmail = $data['inst_email'];
 
