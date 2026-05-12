@@ -35,6 +35,7 @@ class XapiIntegration
 
         $this->headers = [
             'Content-Type'  => 'application/json',
+            'X-Experience-API-Version' => config('lrs-nelc-xapi.version', '1.0.3'),
             'Access-Control-Allow-Origin'   => '*',
         ];
     }

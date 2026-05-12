@@ -9,5 +9,6 @@ return [
     'platform_in_english'    => env('LRS_PLATFORM_EN', ''),
     // Short platform identifier/value used in the statement `platform` field
     'platform' => env('LRS_PLATFORM', ''),
+    'version'   => env('LRS_VERSION', '1.0.3'),
     'base_route'    => 'nelcxapi/test',
 ];
