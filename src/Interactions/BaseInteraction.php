@@ -25,8 +25,7 @@ abstract class BaseInteraction
         $this->platform_in_arabic = $data['platform_in_arabic'] ?? config('lrs-nelc-xapi.platform_in_arabic');
         $this->platform_in_english = $data['platform_in_english'] ?? config('lrs-nelc-xapi.platform_in_english');
         
-        $defaultPlatform = config('lrs-nelc-xapi.platform') ?: (App::getLocale() === 'ar' ? $this->platform_in_arabic : $this->platform_in_english);
-        $this->platform = $data['platform'] ?? $defaultPlatform;
+        $this->platform = $data['platform'] ?? config('lrs-nelc-xapi.platform');
         
         $this->lang = $data['lang'] ?? (App::getLocale() === 'ar' ? 'ar-SA' : 'en-US');
 
