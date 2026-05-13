@@ -16,6 +16,13 @@ class Earned extends BaseInteraction
         $courseTitle = $data['courseName'];
         $courseDesc = '';
 
+        $path = parse_url($certUrl, PHP_URL_PATH);
+
+        $uuid = basename($path);
+
+        $certId = config('app.url') . '/certificates/' . $uuid;
+
+
         $vars = array(
             'actor' => array(
                 'name' => strval($actor),
@@ -27,7 +34,7 @@ class Earned extends BaseInteraction
                 'display' => array("en-US" => "earned")
             ),
             'object' => array(
-                'id' => strval($certUrl),
+                'id' => strval($certId),
                 'definition' => array(
                     'name' => array($this->lang => strval($certName)),
                     'type' => 'https://www.opigno.org/en/tincan_registry/activity_type/certificate'
