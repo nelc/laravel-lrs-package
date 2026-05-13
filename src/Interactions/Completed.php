@@ -18,7 +18,7 @@ class Completed extends BaseInteraction
         $courseId = $data['courseId'];
         $courseTitle = $data['courseName'];
         $courseDesc = '';
-        $lessonDuration = $data['lessonDuration'] ?? '';
+        $lessonDuration = $data['lessonDuration'] ?? 'PT15M0S';
 
         $vars = array(
             'actor' => array(
